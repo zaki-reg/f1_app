@@ -1,4 +1,3 @@
-import 'package:f1_app/constants/app_colors.dart';
 import 'package:f1_app/data/models/driver.dart';
 import 'package:flutter/material.dart';
 

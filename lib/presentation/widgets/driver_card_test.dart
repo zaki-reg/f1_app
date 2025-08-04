@@ -23,7 +23,8 @@ class DriverCardTest extends StatelessWidget {
                     begin: Alignment.centerRight,
                     end: Alignment.centerLeft,
                     colors: [
-                      Colors.black,
+                      // Colors.black,
+                      colorFromHexAndSaturate(driver.teamColour),
                       colorFromHexAndSaturate(driver.teamColour),
                     ],
                   ),
@@ -57,6 +58,7 @@ class DriverCardTest extends StatelessWidget {
                                     'assets/vectors/countries/flags_${driver.countryCode}.svg'),
                               ],
                             ),
+                            SizedBox(width: 50),
                             Expanded(
                               flex: 8,
                               child: Column(

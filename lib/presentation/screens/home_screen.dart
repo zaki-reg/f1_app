@@ -1,7 +1,5 @@
-import 'package:f1_app/constants/app_colors.dart';
 import 'package:f1_app/data/models/driver.dart';
 import 'package:f1_app/logic/cubit/drivers_cubit.dart';
-import 'package:f1_app/presentation/widgets/driver_card.dart';
 import 'package:f1_app/presentation/widgets/driver_card_test.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +16,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // Just call the method; it will trigger the state change and UI rebuild
     context.read<DriversCubit>().getAllDrivers();
   }
 
@@ -98,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildDriversList(List<Driver> drivers) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 3.5,
+        childAspectRatio: 4.0,
         crossAxisCount: 1,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
