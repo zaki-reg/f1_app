@@ -48,7 +48,49 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildLoadedDriversList(List<Driver> drivers) {
     return SafeArea(
       child: SingleChildScrollView(
-        child: buildDriversList(drivers),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              // Container(
+              //   decoration: BoxDecoration(
+              //     // color: const Color.fromARGB(255, 205, 18, 5),
+              //     border: Border(
+              //       top: BorderSide(
+              //         width: 1,
+              //         color: const Color.fromARGB(78, 255, 255, 255),
+              //       ),
+              //       bottom: BorderSide(
+              //         width: 1,
+              //         color: const Color.fromARGB(78, 255, 255, 255),
+              //       ),
+              //     ),
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       Padding(
+              //         padding: const EdgeInsets.symmetric(
+              //           horizontal: 15.0,
+              //           vertical: 10,
+              //         ),
+              //         child: Text(
+              //           'F1 Drivers',
+              //           style: TextStyle(
+              //               color: Colors.white,
+              //               fontSize: 30,
+              //               fontFamily: 'FugazOne'),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 10,
+              // ),
+              buildDriversList(drivers),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -56,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildDriversList(List<Driver> drivers) {
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        childAspectRatio: 2.4,
+        childAspectRatio: 3.5,
         crossAxisCount: 1,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,

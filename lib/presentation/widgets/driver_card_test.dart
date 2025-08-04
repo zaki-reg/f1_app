@@ -8,104 +8,120 @@ class DriverCardTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: const Color.fromARGB(255, 17, 17, 17)),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Container(
-              width: 180,
-              height: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerRight,
-                  end: Alignment.centerLeft,
-                  colors: [
-                    Colors.black,
-                    Colors.red,
-                  ],
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        decoration: BoxDecoration(color: const Color.fromARGB(255, 17, 17, 17)),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Container(
+                height: double.infinity,
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft,
+                    colors: [
+                      Colors.black,
+                      colorFromHexAndSaturate(driver.teamColour),
+                    ],
+                  ),
+                ),
+                child: Image.network(
+                  driver.headshotUrl,
+                  fit: BoxFit.cover,
                 ),
               ),
-              child: Image.network(
-                driver.headshotUrl,
-                fit: BoxFit.cover,
-              ),
             ),
-          ),
-          Expanded(
-            flex: 6,
-            child: Column(
-              children: [
-                Expanded(
-                    flex: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              mainAxisAlignment: MainAxisAlignment.start,
+            Expanded(
+              flex: 6,
+              child: Row(
+                children: [
+                  Expanded(
+                      flex: 5,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Column(
                               children: [
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                        width: 25,
-                                        'assets/vectors/countries/${driver.countryCode}.svg'),
-                                    Expanded(child: SizedBox()),
-                                    Text(
-                                      driver.nameAcronym,
-                                      textAlign: TextAlign.end,
-                                      style: TextStyle(
-                                        height: 1.0,
-                                        fontFamily: 'FugazOne',
-                                        fontSize: 22,
-                                        color: const Color.fromARGB(
-                                            34, 255, 255, 255),
-                                      ),
-                                    ),
-                                  ],
+                                Image.asset(
+                                  'assets/images/logos/${driver.teamName}.png',
+                                  width: 30,
                                 ),
-                                Text(
-                                  driver.fullName,
-                                  textAlign: TextAlign.end,
-                                  style: TextStyle(
-                                    height: 1.15,
-                                    fontFamily: 'FugazOne',
-                                    fontSize: 36,
-                                    color: Colors.white,
-                                  ),
-                                ),
+                                Expanded(child: SizedBox()),
+                                SvgPicture.asset(
+                                    width: 30,
+                                    'assets/vectors/countries/flags_${driver.countryCode}.svg'),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    )),
-                Expanded(
-                    flex: 2,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Row(
-                        children: [
-                          Image.asset(
-                            'assets/images/logos/${driver.teamName}.png',
-                            width: 40,
-                          )
-                        ],
-                      ),
-                    )),
-              ],
+                            Expanded(
+                              flex: 8,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    driver.nameAcronym,
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(
+                                      height: 1.0,
+                                      fontFamily: 'FugazOne',
+                                      fontSize: 17,
+                                      color: const Color.fromARGB(
+                                          34, 255, 255, 255),
+                                    ),
+                                  ),
+                                  Text(
+                                    driver.fullName,
+                                    textAlign: TextAlign.end,
+                                    style: TextStyle(
+                                      height: 1.15,
+                                      fontFamily: 'FugazOne',
+                                      fontSize: 30,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                ],
+              ),
             ),
-          ),
-          Container(
-            width: 10,
-            color: Color.fromARGB(255, 37, 206, 206),
-          ),
-        ],
+            Container(
+              width: 7,
+              color: colorFromHex(driver.teamColour),
+            ),
+          ],
+        ),
       ),
     );
+  }
+
+  Color colorFromHex(String hexColor) {
+    final buffer = StringBuffer();
+    if (hexColor.length == 6) buffer.write('ff');
+    buffer.write(hexColor);
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  Color colorFromHexAndSaturate(String hexColor,
+      {double saturationBoost = 1.2}) {
+    final buffer = StringBuffer();
+    if (hexColor.length == 6) buffer.write('ff');
+    buffer.write(hexColor);
+    final baseColor = Color(int.parse(buffer.toString(), radix: 16));
+
+    final hslColor = HSLColor.fromColor(baseColor);
+    final saturated = hslColor.withSaturation(
+      (hslColor.saturation * saturationBoost).clamp(1.0, 1.0),
+    );
+
+    return saturated.toColor();
   }
 }
