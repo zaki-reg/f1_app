@@ -23,11 +23,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // appBar: AppBar(
-      //   backgroundColor: AppColors.myPurple,
-      //   title: const Text("Drivers"),
-      //   foregroundColor: Colors.white,
-      // ),
       body: BlocBuilder<DriversCubit, DriversState>(
         builder: (context, state) {
           if (state is DriversLoaded) {
@@ -49,41 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
-              // Container(
-              //   decoration: BoxDecoration(
-              //     // color: const Color.fromARGB(255, 205, 18, 5),
-              //     border: Border(
-              //       top: BorderSide(
-              //         width: 1,
-              //         color: const Color.fromARGB(78, 255, 255, 255),
-              //       ),
-              //       bottom: BorderSide(
-              //         width: 1,
-              //         color: const Color.fromARGB(78, 255, 255, 255),
-              //       ),
-              //     ),
-              //   ),
-              //   child: Row(
-              //     children: [
-              //       Padding(
-              //         padding: const EdgeInsets.symmetric(
-              //           horizontal: 15.0,
-              //           vertical: 10,
-              //         ),
-              //         child: Text(
-              //           'F1 Drivers',
-              //           style: TextStyle(
-              //               color: Colors.white,
-              //               fontSize: 30,
-              //               fontFamily: 'FugazOne'),
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
-              // SizedBox(
-              //   height: 10,
-              // ),
               buildDriversList(drivers),
             ],
           ),
